@@ -28,7 +28,7 @@ exports.handler = async (event, context) => {
         return {
           statusCode: 500,
           headers,
-          body: JSON.stringify({ error: "Failed to process GET request" }),
+          body: JSON.stringify({ error: error }),
         };
       }
     } else if (event.httpMethod === "POST") {
