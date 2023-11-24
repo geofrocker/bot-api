@@ -1,0 +1,63 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT-Style Q&A App</title>
+    <style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: left;
+			margin: 50px;
+		}
+	
+		#container {
+			position: relative;
+		}
+	
+		#userInput {
+			width: 80%;
+			padding: 8px;
+			font-size: 16px;
+			margin-bottom: 10px;
+		}
+	
+		#response {
+			margin-top: 20px;
+		}
+	
+		.assistant-response {
+			background-color: #f5f5f5;
+			border: 1px solid #ddd;
+			padding: 5px;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			white-space: pre-line;
+		}
+	
+		.assistant-response p {
+			margin: 0;
+		}
+	
+		button {
+			padding: 8px;
+			font-size: 16px;
+		}
+	</style>
+	
+</head>
+<body>
+
+    <h1>I am feeling worthy</h1>
+	<div class="container">
+		<div id="response"></div>
+		<div id="loader" style="display: none;">Loading...</div>
+		<form id="qaForm">
+			<input type="text" id="userInput">
+			<button id="btn" type="submit">Submit</button>
+		</form>
+	</div>
+    <script src="index.js"></script>
+</body>
+</html>

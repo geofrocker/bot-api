@@ -10,11 +10,12 @@ exports.handler = async (event, context) => {
   
     if (event.httpMethod === "GET") {
       try {
-        const messages = JSON.parse(event.body);
+        // const messages = JSON.parse(event.body);
+        // console.log(messages)
         const openai = new OpenAI()
         const response = await openai.chat.completions.create({
             model: 'gpt-4-1106-preview',
-            messages,
+            messages:[],
           });
         return {
           statusCode: 200,
@@ -33,7 +34,7 @@ exports.handler = async (event, context) => {
       }
     } else if (event.httpMethod === "POST") {
       try {
-        const messages = JSON.parse(event.body);
+        const messages = JSON.parse(event.body).messages;
         const openai = new OpenAI()
         const response = await openai.chat.completions.create({
             model: 'gpt-4-1106-preview',
@@ -50,7 +51,7 @@ exports.handler = async (event, context) => {
         return {
           statusCode: 400,
           headers,
-          body: JSON.stringify({ error: "Failed to process POST request" }),
+          body: JSON.stringify({ error: event.body }),
         };
       }
     } else {
