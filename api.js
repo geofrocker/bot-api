@@ -1,3 +1,5 @@
+import { OpenAI } from 'openai'
+
 exports.handler = async (event, context) => {
     // Set headers to enable CORS
     const headers = {
@@ -27,22 +29,20 @@ exports.handler = async (event, context) => {
       }
     } else if (event.httpMethod === "POST") {
       try {
-        // Parse the incoming JSON payload from the request body
         const requestBody = JSON.parse(event.body);
-  
-        // Process the data from the request body as needed
-        // ...
-  
-        // Return a success response
+        const openai = new OpenAI()
+        const response = await openai.chat.completions.create({
+            model: 'gpt-4-1106-preview',
+            messages,
+          });
         return {
           statusCode: 200,
           headers,
           body: JSON.stringify({
-            message: "POST request processed successfully",
+            message:response.choices[0].message.content,
           }),
         };
       } catch (error) {
-        // Return an error response if there was an issue processing the request
         return {
           statusCode: 400,
           headers,
@@ -50,7 +50,6 @@ exports.handler = async (event, context) => {
         };
       }
     } else {
-      // Handle other HTTP methods (e.g., PUT, DELETE) if needed
       return {
         statusCode: 405,
         headers,
