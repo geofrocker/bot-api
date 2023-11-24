@@ -1,4 +1,4 @@
-import { OpenAI } from 'openai'
+const ai = require('openai')
 
 exports.handler = async (event, context) => {
     // Set headers to enable CORS
@@ -10,14 +10,18 @@ exports.handler = async (event, context) => {
   
     if (event.httpMethod === "GET") {
       try {
-        // Process the GET request as needed
-        const data = require("./db.json");
-  
-        // Return the data as the response
+        const messages = JSON.parse(event.body);
+        const openai = new ai.OpenAI()
+        const response = await openai.chat.completions.create({
+            model: 'gpt-4-1106-preview',
+            messages,
+          });
         return {
           statusCode: 200,
           headers,
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            message:response.choices[0].message.content,
+          }),
         };
       } catch (error) {
         // Return an error response if there was an issue processing the request
@@ -29,7 +33,7 @@ exports.handler = async (event, context) => {
       }
     } else if (event.httpMethod === "POST") {
       try {
-        const requestBody = JSON.parse(event.body);
+        const messages = JSON.parse(event.body);
         const openai = new OpenAI()
         const response = await openai.chat.completions.create({
             model: 'gpt-4-1106-preview',
