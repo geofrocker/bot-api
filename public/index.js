@@ -28,7 +28,7 @@ async function fetchReply() {
             body: JSON.stringify({ messages: conversationArr })
         });
         const responseData = await response.json();
-        conversationArr.push({role: 'assistant', content: responseData.message});
+        conversationArr.push({role: 'assistant', content: responseData.message|| "This content may violate our content policy. If you believe this to be in error, please submit your feedback — your input will aid our research in this area."});
         renderAllResponses();
     } catch (error) {
         console.error('Error fetching response from server:', error);
