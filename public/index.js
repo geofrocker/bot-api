@@ -1,6 +1,6 @@
 const OPENAI_API_URL = '/.netlify/functions/api';
 
-const conversationArr = [
+let conversationArr = [
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -25,10 +25,15 @@ async function fetchReply() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ messages: conversationArr })
+            body: JSON.stringify({ messages: conversationArr.filter(item=>item.content.split("#")[0]!=="Note") })
         });
         const responseData = await response.json();
-        conversationArr.push({role: 'assistant', content: responseData.message|| "This content may violate our content policy. If you believe this to be in error, please submit your feedback — your input will aid our research in this area."});
+        if(responseData.message){
+            conversationArr.push({role: 'assistant', content: responseData.message});
+        }else{
+            conversationArr.push({role: 'assistant', content: "Note# This content may violate our content policy. If you believe this to be in error, please submit your feedback — your input will aid our research in this area."});
+        }
+
         renderAllResponses();
     } catch (error) {
         console.error('Error fetching response from server:', error);
