@@ -49,9 +49,9 @@ exports.handler = async (event, context) => {
         };
       } catch (error) {
         return {
-          statusCode: 400,
+          statusCode: 200,
           headers,
-          body: JSON.stringify({ error: event.body }),
+          body: JSON.stringify({ message: error }),
         };
       }
     } else {
