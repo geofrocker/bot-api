@@ -4,21 +4,19 @@ const conversationArr = [
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
-    var loader = document.getElementById('loader');
-    var userInput = document.getElementById('userInput');
-
-    document.getElementById('btn').addEventListener('click', function() {
+    document.getElementById('qaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var loader = document.getElementById('loader');
         loader.style.display = 'block';
-        conversationArr.push({
+        const userInput = document.getElementById('userInput');
+        conversationArr.push({ 
             role: 'user',
             content: userInput.value
         });
-
         userInput.value = '';
         fetchReply();
     });
 });
-
 
 async function fetchReply() {
     try {
@@ -38,6 +36,7 @@ async function fetchReply() {
 }
 
 function typewriterEffect(text, element, speed = 50, callback) {
+    console.log("called")
     let i = 0;
     const typeInterval = setInterval(function () {
         element.innerHTML += text.charAt(i);

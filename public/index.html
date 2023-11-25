@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPT-Tagit</title>
+    <title>GPT App</title>
     <style>
 		body {
 			font-family: Arial, sans-serif;
@@ -53,8 +53,10 @@
 	<div class="container">
 		<div id="response"></div>
 		<div id="loader" style="display: none;">Loading...</div>
-		<input type="text" id="userInput">
-        <button id="btn" onclick="handleButtonClick()">Submit</button>
+		<form id="qaForm">
+			<input type="text" id="userInput">
+			<button id="btn" type="submit">Submit</button>
+		</form>
 	</div>
     <script src="index.js"></script>
 </body>
