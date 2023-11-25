@@ -4,19 +4,21 @@ const conversationArr = [
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('qaForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var loader = document.getElementById('loader');
+    var loader = document.getElementById('loader');
+    var userInput = document.getElementById('userInput');
+
+    document.getElementById('btn').addEventListener('click', function() {
         loader.style.display = 'block';
-        const userInput = document.getElementById('userInput');
-        conversationArr.push({ 
+        conversationArr.push({
             role: 'user',
             content: userInput.value
         });
+
         userInput.value = '';
         fetchReply();
     });
 });
+
 
 async function fetchReply() {
     try {
